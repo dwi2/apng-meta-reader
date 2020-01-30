@@ -28,8 +28,6 @@ const handler = evt => {
     } else {
       erase();
     }
-  } else {
-    erase();
   }
 };
 
