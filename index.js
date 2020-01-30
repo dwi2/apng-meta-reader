@@ -1,12 +1,17 @@
 import parseAPNG from "apng-js";
 import stringifyObject from "stringify-object";
 
+const defaultText = "Drag and drop APNG file here";
+const notPNGText = "Not a PNG";
+
 const isPNG = item => {
   return item && item.kind === "file" && item.type === "image/png";
 };
 
 const erase = () => {
-  document.querySelector("#meta-output").textContent = "Not a PNG";
+  document.querySelector(
+    "#meta-output"
+  ).textContent = `${notPNGText}, ${defaultText}`;
 };
 
 const handler = evt => {
