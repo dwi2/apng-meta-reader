@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html -d docs --public-url ."
+    "dev": "parcel index.html -d docs",
+    "build": "rm -rf ./docs && parcel build index.html -d docs --public-url ."
   },
   "author": "dwi2@dwi2.com",
   "license": "ISC",
   "dependencies": {
-    "apng-js": "^1.1.0"
+    "apng-js": "^1.1.0",
+    "filesize": "^6.0.1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "stringify-object": "^3.3.0"
+    "parcel-bundler": "^1.12.4"
   }
 }
