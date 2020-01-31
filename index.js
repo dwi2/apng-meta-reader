@@ -9,9 +9,27 @@ const isPNG = item => {
 };
 
 const metaOutput = document.querySelector('#meta-output');
+const preview = document.querySelector('#preview');
 const erase = reason => {
+  revokeImageObject();
+  preview.innerHTML = '';
   metaOutput.textContent = `${reason}, ${defaultText}`;
 };
+const revokeImageObject = () => {
+  const currentImageElem = preview.querySelector('img');
+  if (currentImageElem) {
+    URL.revokeObjectURL(currentImageElem.src);
+  }
+}
+
+const previewAPNG = file => {
+  revokeImageObject();
+  preview.innerHTML = '';
+  const objectURL = URL.createObjectURL(file);
+  const img = document.createElement('img');
+  img.src = objectURL;
+  preview.appendChild(img);
+}
 
 const parseFile = file => {
   if (!file || !(file instanceof File)) {
@@ -33,11 +51,13 @@ const parseFile = file => {
     metaOutput.textContent = `
       file name: ${meta.filename}
       file size: ${filesize(meta.filesize)}
-      duration: ${meta.playTime / 1000} s
+      duration (1 loop): ${meta.playTime / 1000} s
       loop: ${meta.numPlays === 0 ? 'infinite' : meta.numPlays}
       number of frames : ${meta.frames.length}
       width: ${meta.width} px
       height: ${meta.height} px`;
+
+    previewAPNG(file);
   });
 
 };
